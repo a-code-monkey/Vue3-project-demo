@@ -12,7 +12,17 @@ const routes = [
         path: '/pageB',
         name: 'pageB',
         component: () => import('@/views/pageB/index.vue')
-    }    
+    },
+    {
+        path: '/pageC',
+        name: 'pageC',
+        component: () => import('@/views/pageC/index.vue')
+    },
+    {
+        path: '/pageD',
+        name: 'pageD',
+        component: () => import('@/views/pageD/index.vue')
+    }       
     
 ]
 
