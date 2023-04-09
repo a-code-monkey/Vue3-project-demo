@@ -34,7 +34,7 @@
           <slot></slot> 
         </el-form-item>
         <el-form-item>
-          <!-- 具名插槽 -->
+          <!-- 具名插槽 name -->
           <slot name="other-tech"></slot>
         </el-form-item>
       </el-form>
