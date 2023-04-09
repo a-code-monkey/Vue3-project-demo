@@ -11,6 +11,7 @@
         </p>
         <p>answer is: {{ answer }}</p>   
         <p>{{ `${x} --- ${y}` }}</p>  
+        <p> {{ x }} </p>
         <Child ref="child" />   
         <el-row class="mb-4">
             <el-button @click="increment">Default</el-button>
@@ -167,7 +168,7 @@
     }
 
     //组件基础
-    
+
 
     // 生命周期钩子
     onMounted(() => {
