@@ -12,6 +12,8 @@
         <p>answer is: {{ answer }}</p>   
         <p>{{ `${x} --- ${y}` }}</p>  
         <p>{{ `${x} --- ${y}` }}</p>
+        <p>{{ `${x} --- ${y}` }}</p>
+
         <Child ref="child" />   
         <el-row class="mb-4">
             <el-button @click="increment">Default</el-button>
