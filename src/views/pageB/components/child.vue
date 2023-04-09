@@ -2,6 +2,7 @@
 
 <template>
   <div>
+    <div>PageB --- Child</div>
     <div>msg: {{ msg }}</div>
     <div>name: {{name}}</div>
     <button @click="handleClick">修改</button>
