@@ -11,23 +11,60 @@
         </p>
         <p>answer is: {{ answer }}</p>   
         <p>{{ `${x} --- ${y}` }}</p>  
-        <p>{{ `${x} --- ${y}` }}</p>
-        <p>{{ `${x} --- ${y}` }}</p>
-        <h1>11111</h1>
-        <Child ref="child" />   
+        <p>numRef is: {{ numRef }}</p>
+
+        <div>父组件：{{ message }}</div>
+        <Child 
+            ref="childRef" 
+            @ok="handleOk" 
+            @changeMsg="changeMessage"
+            :id="123" 
+            :msg="message" 
+            t="北京"
+        >
+            <div>冲击啊~~~Vue</div>  
+            <template v-slot:other-tech>
+                <div>冲击啊~~~React</div>
+            </template> 
+        </Child>  
+
         <el-row class="mb-4">
             <el-button @click="increment">Default</el-button>
             <el-button type="primary" @click="addX">Primary</el-button>
             <el-button type="success" @click="changeForm">Success</el-button>
             <el-button type="info" @click="changeId">Info</el-button>
-            <el-button type="warning">Warning</el-button>
-            <el-button type="danger">Danger</el-button>
+            <el-button type="warning" @click="openChildModal">Warning</el-button>
+            <el-button type="danger" @click="skipPageB">Danger</el-button>
         </el-row>
     </div>
 </template>
 <script setup>
-    import { ref, reactive, nextTick, toRefs, computed, onMounted, watch, watchEffect } from 'vue'
+    import { getCurrentInstance,ref, reactive, nextTick, toRef, toRefs, computed, onMounted, watch, watchEffect } from 'vue'
     import Child from './child.vue'
+    import { useRouter,useRoute } from 'vue-router'
+
+    const { proxy } = getCurrentInstance();
+    const message = ref('abc');
+    const handleOk = (msg) => {
+        console.log('emit', msg);
+    }
+    // 更改 message 的值，data是从子组件传过来的
+    function changeMessage(data) {
+        message.value = data
+    }
+    const childRef = ref(null) // 通过 模板ref 绑定子组件
+    const openChildModal = () => {
+        // proxy.$refs["childRef"].show(); 
+        childRef.value.show()   
+    }
+
+    const router = useRouter();
+    const route = useRoute()
+    const skipPageB = () => {
+        console.log(router);
+        console.log(route);
+        router.push({ path: "/pageB", query: { } });
+    }
 
     // 响应式状态
     const count = ref(0)
@@ -39,10 +76,12 @@
             'Vue 2 - Advanced Guide',
             'Vue 3 - Basic Guide',
             'Vue 4 - The Mystery'
-        ] 
+        ],
+        obj: { num: 1 } 
     })
 
     const { form, arr } = toRefs(state);
+    const numRef = toRef(state.obj, 'num');
 
     // 一个计算属性 ref
     const publishedBooksMessage = computed(() => {

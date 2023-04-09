@@ -7,7 +7,12 @@ const routes = [
         path: '/pageA',
         name: 'pageA',
         component: () => import('@/views/pageA/index.vue')
-    }
+    },
+    {
+        path: '/pageB',
+        name: 'pageB',
+        component: () => import('@/views/pageB/index.vue')
+    }    
     
 ]
 
